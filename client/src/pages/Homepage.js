@@ -28,9 +28,8 @@ Apiroutes.googleSearch(search)
     setBooks(res.data.items)
     console.log(books);
     
-})
+    })
 .catch(err => console.log(err))
-
 }
 
 
@@ -64,4 +63,4 @@ Apiroutes.googleSearch(search)
     )
 }
 
-export default Homepage
+export default Homepage;
