@@ -58,10 +58,6 @@ Apiroutes.googleSearch(search)
         />
             ))}
         
-
-        
-        
-
         </div>
         </div>
         </div>
