@@ -1,4 +1,5 @@
 import React, {useState} from 'react';
+import InfoCard from '../components/InfoCard';
 import ResultCard from '../components/ResultCard';
 import SearchBar from '../components/SearchBar';
 import Apiroutes from '../utils/Apiroutes';
@@ -8,6 +9,7 @@ function Homepage() {
 
 const [search, setSearch] = useState('');
 const [books, setBooks] = useState([]);
+const [error, setError] = useState('');
 
 
 
@@ -17,16 +19,15 @@ const onInputChange = (e) => {
 
 const handleSearch = (e) => {
 e.preventDefault();
-if(!search) {
-    return;
-}
+
 Apiroutes.googleSearch(search)
 .then(res => {
-    if(res.data.length === 0) {
-        throw new Error("No results found!");
-    }
+    if(!res.data.length) {
+        setError("No results found, Please try again!");
+    } else if (res.data.length) {
     setBooks(res.data.items)
     console.log(books);
+    }
 })
 .catch(err => console.log(err))
 
@@ -43,7 +44,9 @@ Apiroutes.googleSearch(search)
         handleChange={onInputChange}
         handleSearch={handleSearch}
         />
-       
+         
+        {error ? <InfoCard error={error}/>: <InfoCard error={"Please enter a book title to begin!"}/>}
+
             {books.map(book => (
         <ResultCard  
         id={book.id}
