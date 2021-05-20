@@ -1,12 +1,16 @@
 const mongoose = require("mongoose");
-
 const Schema = mongoose.Schema;
 
 const BookSchema = new Schema (
     {
+        id: {
+            type: String,
+            required: true,
+
+        },
         title: {
             type: String,
-            trim: true
+            required: true
         },
         authors: {
             type: Array
@@ -19,6 +23,10 @@ const BookSchema = new Schema (
         },
         link: {
             type: String
+        },
+        date: {
+            type: Date,
+            default: Date.now
         }
     }
 );

@@ -4,12 +4,13 @@ import ResultCard from '../components/ResultCard';
 import SearchBar from '../components/SearchBar';
 import Apiroutes from '../utils/Apiroutes';
 import './style.css';
+import Wrapper from '../components/Wrapper/index';
 
 function Homepage() {
 
 const [search, setSearch] = useState('');
 const [books, setBooks] = useState([]);
-const [error, setError] = useState('');
+//const [error, setError] = useState('');
 
 
 
@@ -17,14 +18,15 @@ const onInputChange = (e) => {
     setSearch(e.target.value);
 };
 
+
 const handleSearch = (e) => {
 e.preventDefault();
 
 Apiroutes.googleSearch(search)
 .then(res => {
-    if(!res.data.length) {
-        setError("No results found, Please try again!");
-    } 
+    //if(!res.data.length) {
+     //   setError("No results found, Please try again!");
+    //} 
     setBooks(res.data.items)
     console.log(books);
     
@@ -33,33 +35,49 @@ Apiroutes.googleSearch(search)
 }
 
 
+const handleSave = (thisBook) => {
+    console.log("save this: ", thisBook)
+    Apiroutes.saveBook ({
+        id: thisBook.id,
+        title: thisBook.title,
+        authors: thisBook.authors,
+        description: thisBook.description,
+        image: thisBook.image,
+        link: thisBook.link
+    })
+    .then(res => console.log("Success! ", res))
+    .catch(err => console.log(err));
+}
+
+
     return (
-        <div className="container-fluid">
-        <div className="row justify-content-center text-center mt-4">
-        <div className="col-md-8">
-   
+        <>
+   <Wrapper>
         <SearchBar
         search={search}
         handleChange={onInputChange}
         handleSearch={handleSearch}
         />
          
-        {error ? <InfoCard error={error}/>: <InfoCard error={"Please enter a book title to begin!"}/>}
 
-            {books.map(book => (
+            {books.length ? (books.map(book => (
         <ResultCard  
         id={book.id}
+        link={book.volumeInfo.previewLink}
         title={book.volumeInfo.title}
         authors={book.volumeInfo.authors && book.volumeInfo.authors.length>1 ? book.volumeInfo.authors.join(", "): book.volumeInfo.authors}
         description={book.volumeInfo.description}
         image={book.volumeInfo.imageLinks.thumbnail}
         viewBtn={() => {window.location.href=book.volumeInfo.previewLink}}
+        secondBtn={"Save"}
+        saveDelBtn={handleSave}
         />
-            ))}
-        
-        </div>
-        </div>
-        </div>
+            ))) : (<InfoCard error={"Enter book title to begin search!"}/>)}
+
+  
+  </Wrapper>
+</> 
+       
     )
 }
 
