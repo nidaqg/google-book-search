@@ -19,8 +19,11 @@ function Saved() {
         .catch(err => console.log(err));
     };
 
-    const deleteBook= (id) => {
-        Apiroutes.deleteBook(id)
+    const deleteBook= (e, book) => {
+        console.log(book);
+        console.log(book._id);
+
+        Apiroutes.deleteBook(book._id)
           .then(res => displayBooks())
           .catch(err => console.log(err));
       }
@@ -28,8 +31,12 @@ function Saved() {
     return (
         <>
         <Wrapper>
+            <div className="mb-3">
+                <h1>Saved Books</h1>
+            </div>
         {books.map(book => (
         <ResultCard  
+        book={book}
         id={book._id}
         title={book.title}
         authors={book.authors && book.authors.length>1 ? book.authors.join(", "): book.authors}
@@ -37,9 +44,10 @@ function Saved() {
         image={book.image}
         viewBtn={() => {window.location.href=book.link}}
         secondBtn={"Delete"}
+        saveDelBtn={deleteBook}
         />
             ))}
-            Saved Page
+           
         </Wrapper> 
         </>
     )

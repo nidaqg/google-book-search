@@ -14,7 +14,7 @@ function ResultCard(props) {
 
         <div className="d-grid gap-2 d-md-block">
            <button className="btn btn-dark localBtn m-2" target="_blank" rel="noopener noreferrer" type="button" onClick={props.viewBtn}>View</button>
-           <button className="btn btn-dark localBtn m-2" type="button" onClick={props.saveDelBtn}>{props.secondBtn}</button>
+           <button className="btn btn-dark localBtn m-2" type="button" onClick={(e) => props.saveDelBtn(e, props.book) }>{props.secondBtn}</button>
        </div>
 
       </div>

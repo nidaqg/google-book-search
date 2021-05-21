@@ -35,15 +35,16 @@ Apiroutes.googleSearch(search)
 }
 
 
-const handleSave = (thisBook) => {
+const handleSave = (e, thisBook) => {
+
     console.log("save this: ", thisBook)
+
     Apiroutes.saveBook ({
-        id: thisBook.id,
-        title: thisBook.title,
-        authors: thisBook.authors,
-        description: thisBook.description,
-        image: thisBook.image,
-        link: thisBook.link
+        title: thisBook.volumeInfo.title,
+        authors: thisBook.volumeInfo.authors,
+        description: thisBook.volumeInfo.description,
+        image: thisBook.volumeInfo.imageLinks.thumbnail,
+        link: thisBook.volumeInfo.previewLink
     })
     .then(res => console.log("Success! ", res))
     .catch(err => console.log(err));
@@ -61,7 +62,8 @@ const handleSave = (thisBook) => {
          
 
             {books.length ? (books.map(book => (
-        <ResultCard  
+        <ResultCard 
+        book={book} 
         id={book.id}
         link={book.volumeInfo.previewLink}
         title={book.volumeInfo.title}
