@@ -10,7 +10,6 @@ function Homepage() {
 
 const [search, setSearch] = useState('');
 const [books, setBooks] = useState([]);
-//const [error, setError] = useState('');
 
 
 
