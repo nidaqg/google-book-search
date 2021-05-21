@@ -23,7 +23,7 @@ As a user I want to be able to search for books by title and save books I am int
 
 ## Installation
 
-This application was created using the MERN stack. The deployed app can be found at :
+This application was created using the MERN stack. The deployed app can be found at [here](https://react-googlebook-search23.herokuapp.com/)
 
 
 ## Usage
@@ -70,7 +70,7 @@ SOFTWARE.
 
 The repo for this project can be found here: https://github.com/nidaqg/google-book-search
 
-Deployed project can be found at: 
+Deployed project can be found at: https://react-googlebook-search23.herokuapp.com/
 
 For any questions or to report issues, email me at: nidaqg@gmail.com
 
