@@ -1,7 +1,7 @@
 {
   "name": "google-book-search",
   "version": "1.0.0",
-  "description": "MERN app got google book search",
+  "description": "MERN app for google book search",
   "main": "server.js",
   "scripts": {
     "start": "if-env NODE_ENV=production && npm run start:prod || npm run start:dev",
